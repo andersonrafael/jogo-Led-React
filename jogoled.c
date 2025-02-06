@@ -1,4 +1,5 @@
- // **********  Versão 1.0 - Incremento do botão B ao piscar o led vermelho do RGB ***********
+ // **********  Versão 1.0 - Incremento do botão B ao piscar o led vermelho e verde do RGB ***********
+
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -117,7 +118,7 @@ void startGame() {
         int current_led = led_state;
         setRainbowColor(current_led);
         absolute_time_t start = get_absolute_time();
-        printf("Aguardando botão...\n");
+        //printf("Aguardando botão...\n");
 
         int correct_button = (current_led == 0 || current_led == 3) ? BUTTON_B : BUTTON_A;  
 
@@ -144,7 +145,7 @@ void startGame() {
         printf("Tempo de reação: %d ms\n", reaction_time);
         playTone(reaction_time);
 
-        printf("Aguardando soltar botão...\n");
+       // printf("Aguardando soltar botão...\n");
         while (gpio_get(correct_button) == 0);
         sleep_ms(500);
 
@@ -159,4 +160,6 @@ int main() {
     startGame();
     return 0;
 }
+
+
 
