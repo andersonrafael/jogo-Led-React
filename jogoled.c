@@ -17,6 +17,7 @@
 
 int led_state = 0;  // Estado para alternar as cores do LED
 
+// Função de inicialização do hardware
 void initHardware() {
     gpio_init(LED_R);
     gpio_set_dir(LED_R, GPIO_OUT);
@@ -92,24 +93,46 @@ void playTone(int duration) {
     gpio_put(BUZZER_PIN, 0);
 }
 
-// Novo som de erro (descendente)
+// Nova melodia de erro ao clicar no botão errado
 void playErrorTone() {
-    printf("Opa! botão errado\n");
+    printf("Opa! Botão errado\n");
 
-    int freqs[] = {1000, 800, 600, 400, 200};  // Tons descendentes
-    for (int i = 0; i < 5; i++) {
-        for (int j = 0; j < 100; j++) {
-            gpio_put(BUZZER_PIN, 1);
-            sleep_us(freqs[i]);
-            gpio_put(BUZZER_PIN, 0);
-            sleep_us(freqs[i]);
-        }
-        sleep_ms(50);
+    // Frequências para a melodia: Do, Ré, Mi, Fá, Sol, Fá, Mi, Ré, Do
+    int melody[] = {261, 294, 329, 349, 392, 349, 329, 294, 261};  // Frequências em Hz
+    int duration = 200;  // Duração de cada nota (200ms)
+
+    // Reproduz a melodia
+    for (int i = 0; i < 9; i++) {
+        gpio_put(BUZZER_PIN, 1);
+        sleep_us(1000000 / melody[i]);  // Duração da nota (baseada na frequência)
+        gpio_put(BUZZER_PIN, 0);
+        sleep_ms(50);  // Pausa entre as notas
     }
 
-    gpio_put(BUZZER_PIN, 0);
+    gpio_put(BUZZER_PIN, 0);  // Desliga o buzzer no final
 }
 
+// Função para piscar os LEDs antes de iniciar o jogo
+void blinkLedsBeforeGame() {
+    printf("Preparando... Piscar LEDs!\n");
+
+    // Piscar os LEDs 5 vezes
+    for (int i = 0; i < 5; i++) {
+        gpio_put(LED_R, 1);  // Acende o LED vermelho
+        gpio_put(LED_G, 1);  // Acende o LED verde
+        gpio_put(LED_B, 1);  // Acende o LED azul
+        sleep_ms(500);       // Espera por 500ms
+
+        gpio_put(LED_R, 0);  // Apaga o LED vermelho
+        gpio_put(LED_G, 0);  // Apaga o LED verde
+        gpio_put(LED_B, 0);  // Apaga o LED azul
+        sleep_ms(500);       // Espera por 500ms
+    }
+
+    printf("Jogo começando...\n");
+}
+
+// Função para iniciar o jogo
 void startGame() {
     while (1) {
         printf("Prepare-se...\n");
@@ -153,13 +176,16 @@ void startGame() {
     }
 }
 
+// Função principal
 int main() {
     stdio_init_all();
     initHardware();
+
+    // Piscar os LEDs antes de começar o jogo
+    blinkLedsBeforeGame();
+
     printf("Jogo Iniciado!\n");
     startGame();
+
     return 0;
 }
-
-
-
