@@ -45,4 +45,4 @@ link do Projeto no simulador wokwi:
 https://wokwi.com/projects/422175428422596609
 ![projeto final embarcatech](https://github.com/user-attachments/assets/02588312-e27e-433a-8bf7-2fe0f6811440)
 
-![projeto final embarcatech](https://github.com/user-attachments/assets/efc55f37-a071-463b-b191-6f181754fd89)
+ * O projeto no simulador wokwi teve o led RGB substituido pelos leds VERMELHO, AZUL E VERDE por critério de funcionalidades do simulador.
