@@ -1,3 +1,7 @@
+
+
+https://github.com/user-attachments/assets/67a54276-92e5-4d2a-bcd5-b9c07885801c
+
 Objetivo do Jogo:
 O objetivo do jogo é testar a rapidez do jogador em apertar o botão correto, quando a cor correspondente do LED aparecer. 
 O tempo de reação é medido em milissegundos e a cada rodada, o jogador tenta superar seu próprio recorde.
